@@ -1,0 +1,71 @@
+﻿:root {
+    --azul-petroleo: #1E1E4B;
+    --verde-agua: #009688;
+    --verde-hover: #00796B;
+    --amarelo: #FFD700;
+    --vermelho: #dc3545;
+    --cinza: #6c757d;
+}
+
+.navbar {
+    background-color: var(--azul-petroleo) !important;
+}
+
+    .navbar a:hover {
+        color: var(--amarelo) !important; /* destaque ao passar o mouse */
+    }
+
+.btn-primary {
+    background-color: var(--verde-agua) !important;
+    border-color: var(--verde-agua) !important;
+}
+
+    .btn-primary:hover {
+        background-color: var(--verde-hover) !important;
+        border-color: var(--verde-hover) !important;
+    }
+
+
+
+.color-petroleo {
+    color: var(--azul-petroleo) !important; /* Azul petróleo */
+}
+
+.table-header-custom {
+    background-color: var(--azul-petroleo) !important;
+    color: white !important; /* contraste com a logo */
+}
+
+
+
+
+/* Tabelas */
+.table {
+    border-radius: 6px;
+    overflow: hidden; /* garante que o arredondamento funcione */
+}
+
+/* Cabeçalho da tabela */
+.table-header-custom th {
+    border-top: none;
+}
+
+/* Cards (ex: Detalhes do Cliente) */
+.panel, .card, .table-responsive {
+    border-radius: 6px !important;
+}
+
+/* Botões */
+.btn {
+    border-radius: 6px !important;
+}
+
+/* Badges */
+.badge {
+    border-radius: 6px !important;
+}
+
+/* Navbar e Footer */
+.navbar, footer {
+    border-radius: 0; /* mantêm retos para não “quebrar” */
+}

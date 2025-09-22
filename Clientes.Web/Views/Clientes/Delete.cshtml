@@ -1,0 +1,65 @@
+﻿@model Clientes.Web.Models.ClienteViewModel
+
+@{
+    ViewBag.Title = "Excluir Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger"><i class="fa fa-trash"></i> Excluir Cliente</h2>
+    <p class="lead">Tem certeza que deseja excluir este cliente?</p>
+    <hr />
+
+    <div class="card shadow-sm border-danger mb-3">
+        <div class="card-header bg-danger text-white">
+            <strong>Cliente Selecionado</strong>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Nome</dt>
+                <dd class="col-sm-9">@Model.Nome</dd>
+
+                <dt class="col-sm-3">CPF</dt>
+                <dd class="col-sm-9">@Model.CpfFormatado</dd>
+
+                <dt class="col-sm-3">Data de Nascimento</dt>
+                <dd class="col-sm-9">@Model.DataNascimento.ToShortDateString()</dd>
+
+                <dt class="col-sm-3">Sexo</dt>
+                <dd class="col-sm-9">
+                    @(Model.Sexo == "M" ? "Masculino" :
+                      Model.Sexo == "F" ? "Feminino" : "Não Informado")
+                </dd>
+
+                <dt class="col-sm-3">Situação</dt>
+                <dd class="col-sm-9">
+                    @if (Model.NomeSituacao == "Ativo")
+                    {
+                        <span class="badge bg-success">Ativo</span>
+                    }
+                    else if (Model.NomeSituacao == "Inativo")
+                    {
+                        <span class="badge bg-secondary">Inativo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">@Model.NomeSituacao</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Delete", "Clientes", new { id = Model.Id }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="text-end">
+            <button type="submit" class="btn btn-danger me-2">
+                <i class="fa fa-trash"></i> Excluir
+            </button>
+            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                <i class="fa fa-arrow-left"></i> Voltar à Lista
+            </a>
+        </div>
+    }
+</div>

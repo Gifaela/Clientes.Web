@@ -1,0 +1,59 @@
+﻿@model Clientes.Web.Models.ClienteViewModel
+
+@{
+    ViewBag.Title = "Detalhes do Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="color-petroleo"><i class="fa fa-user"></i> Detalhes do Cliente</h2>
+    <hr />
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-light">
+            <h4 class="mb-0">@Model.Nome</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Id</dt>
+                <dd class="col-sm-9">@Model.Id</dd>
+
+                <dt class="col-sm-3">CPF</dt>
+                <dd class="col-sm-9">@Model.CpfFormatado</dd>
+
+                <dt class="col-sm-3">Data de Nascimento</dt>
+                <dd class="col-sm-9">@Model.DataNascimento.ToShortDateString()</dd>
+
+                <dt class="col-sm-3">Sexo</dt>
+                <dd class="col-sm-9">
+                    @(Model.Sexo == "M" ? "Masculino" :
+                      (Model.Sexo == "F" ? "Feminino" : "Não Informado"))
+                </dd>
+
+                <dt class="col-sm-3">Situação</dt>
+                <dd class="col-sm-9">
+                    @if (Model.NomeSituacao == "Ativo")
+                    {
+                        <span class="badge bg-success">Ativo</span>
+                    }
+                    else if (Model.NomeSituacao == "Inativo")
+                    {
+                        <span class="badge bg-secondary">Inativo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">@Model.NomeSituacao</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer text-end">
+            <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-outline-primary me-2">
+                <i class="fa fa-edit"></i> Editar
+            </a>
+            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                <i class="fa fa-arrow-left"></i> Voltar à Lista
+            </a>
+        </div>
+    </div>
+</div>

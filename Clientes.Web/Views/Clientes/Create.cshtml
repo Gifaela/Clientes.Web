@@ -1,0 +1,82 @@
+﻿@model Clientes.Web.Models.ClienteViewModel
+
+@{
+    ViewBag.Title = "Novo Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="color-petroleo"><i class="fa fa-user-plus"></i> Novo Cliente</h2>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Nome, new { @class = "form-label fw-bold" })
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Cpf, new { @class = "form-label fw-bold" })
+                        @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control cpf" } })
+                        @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.DataNascimento, new { @class = "form-label fw-bold" })
+                        @Html.TextBoxFor(model => model.DataNascimento,
+                            "{0:yyyy-MM-dd}",
+                            new { @class = "form-control", type = "date" })
+                        @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Sexo, new { @class = "form-label fw-bold" })
+                        @Html.DropDownListFor(model => model.Sexo,
+                            new SelectList(new[] {
+                                new { Value = "M", Text = "Masculino" },
+                                new { Value = "F", Text = "Feminino" }
+                            }, "Value", "Text"),
+                            "Selecione",
+                            new { @class = "form-select" })
+                        @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.IdSituacao, new { @class = "form-label fw-bold" })
+                        @Html.DropDownListFor(model => model.IdSituacao,
+                            new SelectList(ViewBag.Situacoes, "Id", "Nome", Model?.IdSituacao),
+                            "Selecione uma Situação",
+                            new { @class = "form-select" })
+                        @Html.ValidationMessageFor(model => model.IdSituacao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer text-end">
+                <button type="submit" class="btn btn-success me-2">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                    <i class="fa fa-arrow-left"></i> Voltar à Lista
+                </a>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        $('.cpf').mask('000.000.000-00', { reverse: true });
+    });
+</script>
